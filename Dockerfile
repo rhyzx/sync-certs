@@ -1,9 +1,19 @@
-FROM node:alpine
-ENV NODE_ENV=production
+FROM golang:1.15-alpine AS build
 
+# RUN apk add --no-cache git
 WORKDIR /app
-COPY package.json yarn.lock  ./
-RUN yarn install
+
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . ./
-CMD ["yarn", "start"]
+# # Unit tests
+# RUN CGO_ENABLED=0 go test -v
+RUN go build -o app .
+
+##############
+FROM alpine
+RUN apk add ca-certificates
+
+COPY --from=build /app/app /app
+CMD ["/app"]
