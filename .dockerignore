@@ -1,4 +1,14 @@
-.git
-node_modules
-helm
-tmp
+# Ignore everything
+*
+
+# Allow files and directories
+!/*.go
+!/go.mod
+!/go.sum
+
+# Ignore unnecessary files inside allowed directories
+# This should go after the allowed directories
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db

@@ -1,19 +1,17 @@
-FROM golang:1.15-alpine AS build
+FROM golang:1.18-bullseye AS build
 
-# RUN apk add --no-cache git
-WORKDIR /app
+WORKDIR /build
 
 COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . ./
 # # Unit tests
-# RUN CGO_ENABLED=0 go test -v
-RUN go build -o app .
+# RUN go test -v
+RUN go build -ldflags="-w -s" -o /app .
 
 ##############
-FROM alpine
-RUN apk add ca-certificates
+FROM gcr.io/distroless/static-debian11
 
-COPY --from=build /app/app /app
+COPY --from=build /app /app
 CMD ["/app"]
