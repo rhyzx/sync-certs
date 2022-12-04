@@ -8,7 +8,7 @@ RUN go mod download
 COPY . ./
 # # Unit tests
 # RUN go test -v
-RUN go build -ldflags="-w -s" -o /app .
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o /app .
 
 ##############
 FROM gcr.io/distroless/static-debian11
