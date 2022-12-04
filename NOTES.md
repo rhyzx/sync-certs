@@ -15,6 +15,7 @@
 1. 无法通过 `resourceVersion` 防重复处理，因为历史记录默认只有5分钟<sup>1</sup>。
 2. 如需持久化，无法使用 `emptyDir`，任务间无法共享数据。
 3. 不存在 `modifiedTimestamp` 这样的信息来防重复处理。
+4. 可以保存 json 数据进 annotation，通过 `lastAppliedDigest` 的机制来防重复提交到 cdn。
 
 
 ## 最终妥协的方案
