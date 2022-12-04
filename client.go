@@ -23,9 +23,16 @@ func (client *Client) UpdateDomainCert(domain, cert, key string) (int, error) {
 	request := cdn.NewUpdateDomainConfigRequest()
 	request.Domain = &domain
 
+	// TODO http2, htst by config
 	on := "on"
 	request.Https = &cdn.Https{
 		Switch: &on,
+		Http2: &on,
+		Hsts: &cdn.Hsts{
+			Switch: &on,
+			MaxAge: common.Int64Ptr(31536000),
+			IncludeSubDomains: &on,
+		},
 		CertInfo: &cdn.ServerCert{
 			Certificate: &cert,
 			PrivateKey:  &key,
