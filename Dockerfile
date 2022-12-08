@@ -1,4 +1,4 @@
-FROM golang:1.18-bullseye AS build
+FROM golang:1.18-alpine AS build
 
 WORKDIR /build
 
@@ -12,6 +12,7 @@ RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o /app .
 
 ##############
 FROM gcr.io/distroless/static-debian11
+USER nobody
 
 COPY --from=build /app /app
 CMD ["/app"]
