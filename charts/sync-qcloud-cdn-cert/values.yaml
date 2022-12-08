@@ -1,0 +1,10 @@
+image:
+  repository: ghcr.io/yiiz/sync-qcloud-cdn-cert
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+secrets: {}
+#   SecretKey:
+#   SecretId:

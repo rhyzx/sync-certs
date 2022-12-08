@@ -1,0 +1,4 @@
+apiVersion: v2
+name: sync-qcloud-cdn-cert
+version: 0.1.0
+appVersion: master
