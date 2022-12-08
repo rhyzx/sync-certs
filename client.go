@@ -31,7 +31,7 @@ func (client *Client) UpdateDomainCert(domain, cert, key string) (int, error) {
 		Hsts: &cdn.Hsts{
 			Switch: &on,
 			MaxAge: common.Int64Ptr(31536000),
-			IncludeSubDomains: &on,
+			// IncludeSubDomains: &on,
 		},
 		CertInfo: &cdn.ServerCert{
 			Certificate: &cert,
