@@ -3,20 +3,14 @@ kind: ServiceAccount
 metadata:
   name: {{ include "helm.fullname" . }}
   labels:
-    app: {{ include "helm.name" . }}
-    chart: {{ include "helm.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "helm.labels" . | nindent 4 }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ include "helm.fullname" . }}
   labels:
-    app: {{ include "helm.name" . }}
-    chart: {{ include "helm.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "helm.labels" . | nindent 4 }}
 rules:
 - apiGroups:
   - ''
@@ -32,10 +26,7 @@ kind: ClusterRoleBinding
 metadata:
   name: {{ include "helm.fullname" . }}
   labels:
-    app: {{ include "helm.name" . }}
-    chart: {{ include "helm.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "helm.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
