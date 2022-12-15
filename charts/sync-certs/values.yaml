@@ -1,0 +1,9 @@
+image:
+  repository: ghcr.io/rhyzx/sync-certs
+
+nameOverride: ""
+fullnameOverride: ""
+
+secrets: {}
+#   SECRET_ID:
+#   SECRET_KEY:
