@@ -15,7 +15,6 @@ spec:
           containers:
           - name: {{ .Chart.Name }}
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-            imagePullPolicy: Always
             envFrom:
             - secretRef:
                 name: {{ include "helm.fullname" . }}

@@ -1,18 +1,15 @@
-FROM golang:1.18-alpine AS build
+FROM clux/muslrust:stable AS build
 
-WORKDIR /build
+WORKDIR /repo
 
-COPY go.mod go.sum ./
-RUN go mod download
+RUN cargo init
+COPY Cargo.toml Cargo.lock ./
+RUN cargo build --release
 
-COPY . ./
-# # Unit tests
-# RUN go test -v
-RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o /app .
+COPY src ./src
+RUN cargo build --release
 
 ##############
-FROM gcr.io/distroless/static-debian11
-USER nobody
-
-COPY --from=build /app /app
-CMD ["/app"]
+FROM scratch
+COPY --from=build /repo/target/x86_64-unknown-linux-musl/release/sync-certs /sync-certs
+CMD ["/sync-certs"]
