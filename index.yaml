@@ -1,5 +1,14 @@
 apiVersion: v1
 entries:
+  sync-certs:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-12-17T11:52:31.305543048Z"
+    digest: 2e3bc941ed288a705f0d49da808b6f5d6ab210c1a30fb4ee287fb947eb98d10c
+    name: sync-certs
+    urls:
+    - https://github.com/YIIZ/sync-qcloud-cdn-cert/releases/download/sync-certs-0.1.0/sync-certs-0.1.0.tgz
+    version: 0.1.0
   sync-qcloud-cdn-cert:
   - apiVersion: v2
     appVersion: master
@@ -9,4 +18,4 @@ entries:
     urls:
     - https://github.com/YIIZ/sync-qcloud-cdn-cert/releases/download/sync-qcloud-cdn-cert-0.1.0/sync-qcloud-cdn-cert-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-08T16:30:33.604176542Z"
+generated: "2022-12-17T11:52:31.305771854Z"
