@@ -2,7 +2,7 @@ name: Helm chart
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
     tags: ["v*.*.*"]
 
 jobs:
