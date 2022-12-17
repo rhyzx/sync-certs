@@ -1,4 +1,4 @@
 apiVersion: v2
 name: sync-certs
-version: 0.2.0
-appVersion: master
+version: 0.1.0
+appVersion: latest

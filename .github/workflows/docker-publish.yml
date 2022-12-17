@@ -2,10 +2,10 @@ name: Docker
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
     tags: ["v*.*.*"]
   pull_request:
-    branches: ["master"]
+    branches: ["main"]
 
 env:
   REGISTRY: ghcr.io
@@ -20,9 +20,6 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
       - name: Install cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v2.8.1
@@ -45,12 +42,14 @@ jobs:
         uses: docker/metadata-action@v4.1.1
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # tag latest on master
+          flavor: |
+            latest=true
 
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v3.2.0
         with:
-          context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
