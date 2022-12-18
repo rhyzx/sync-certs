@@ -1,7 +1,5 @@
+use chrono::{Timelike, Utc};
 use sha2::{Digest, Sha256};
-use time::format_description::well_known::iso8601::TimePrecision;
-use time::format_description::well_known::{iso8601, Iso8601};
-use time::OffsetDateTime;
 
 use crate::applyment::Applyment;
 
@@ -46,19 +44,7 @@ pub async fn apply(applyment: &Applyment<'_>) -> Result<(), Box<dyn std::error::
     let access_key_secret = std::env::var(&access_key_secret_env)
         .unwrap_or_else(|_| panic!("Failed to retrieve env: {}", &access_key_secret_env));
 
-    let time = OffsetDateTime::now_utc()
-        .format(
-            &Iso8601::<
-                {
-                    iso8601::Config::DEFAULT
-                        .set_time_precision(TimePrecision::Second {
-                            decimal_digits: None,
-                        })
-                        .encode()
-                },
-            >,
-        )
-        .unwrap();
+    let dt = format!("{:?}", Utc::now().with_nanosecond(0).unwrap());
     let nonce = format!("{:x}", rand::random::<u128>());
 
     let payload = serde_urlencoded::to_string([
@@ -76,7 +62,7 @@ pub async fn apply(applyment: &Applyment<'_>) -> Result<(), Box<dyn std::error::
         ("host", "cdn.aliyuncs.com"),
         ("x-acs-action", "SetDomainServerCertificate"),
         ("x-acs-content-sha256", &payload_digest),
-        ("x-acs-date", &time),
+        ("x-acs-date", &dt),
         ("x-acs-signature-nonce", &nonce),
         ("x-acs-version", "2018-05-10"),
     ];

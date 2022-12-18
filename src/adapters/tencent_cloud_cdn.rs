@@ -1,7 +1,6 @@
+use chrono::{Timelike, Utc};
 use json_patch::merge;
 use sha2::{Digest, Sha256};
-use time::macros::format_description;
-use time::OffsetDateTime;
 
 use crate::applyment::Applyment;
 
@@ -40,11 +39,9 @@ pub async fn apply(applyment: &Applyment<'_>) -> Result<(), Box<dyn std::error::
     let secret_key = std::env::var(&secret_key_env)
         .unwrap_or_else(|_| panic!("Failed to retrieve env: {}", &secret_key_env));
 
-    let time = OffsetDateTime::now_utc();
-    let date = time
-        .format(format_description!("[year]-[month]-[day]"))
-        .unwrap();
-    let timestamp = time.unix_timestamp().to_string();
+    let dt = Utc::now().with_nanosecond(0).unwrap();
+    let date = dt.format("%Y-%m-%d").to_string();
+    let timestamp = dt.timestamp().to_string();
 
     let mut payload = serde_json::json!({
         "Https": applyment.extra.map_or(serde_json::Value::Null, |str| {
