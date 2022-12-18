@@ -4,6 +4,6 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-secrets: {}
+env: {}
 #   SECRET_ID:
 #   SECRET_KEY:
