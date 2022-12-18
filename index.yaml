@@ -3,6 +3,14 @@ entries:
   sync-certs:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-12-18T08:11:27.526860673Z"
+    digest: d2224502f62769019abd3834d106d1cc6fd678d0b498141bfd2701dc51ef9142
+    name: sync-certs
+    urls:
+    - https://github.com/rhyzx/sync-certs/releases/download/sync-certs-0.1.3/sync-certs-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-12-17T12:48:32.186273347Z"
     digest: d22f4f52dc46633caf35ae4e97c68241921f424522f2d14192a78592849ee007
     name: sync-certs
@@ -34,4 +42,4 @@ entries:
     urls:
     - https://github.com/YIIZ/sync-qcloud-cdn-cert/releases/download/sync-qcloud-cdn-cert-0.1.0/sync-qcloud-cdn-cert-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-17T12:48:32.186283747Z"
+generated: "2022-12-18T08:11:27.526873672Z"
