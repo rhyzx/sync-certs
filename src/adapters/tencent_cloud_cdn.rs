@@ -1,5 +1,3 @@
-use hmac::digest::generic_array::{typenum::consts::U32, GenericArray};
-use hmac::{Hmac, Mac};
 use json_patch::merge;
 use sha2::{Digest, Sha256};
 use time::macros::format_description;
@@ -7,11 +5,7 @@ use time::OffsetDateTime;
 
 use crate::applyment::Applyment;
 
-fn hmac_sha256(key: &[u8], data: &[u8]) -> GenericArray<u8, U32> {
-    let mut mac = Hmac::<Sha256>::new_from_slice(key).expect("HMAC can take key of any size");
-    mac.update(data);
-    mac.finalize().into_bytes()
-}
+use super::common::hmac_sha256;
 
 // https://cloud.tencent.com/document/product/1278/55260
 // https://cloud.tencent.com/document/api/228/41116
