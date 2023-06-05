@@ -7,6 +7,7 @@ COPY Cargo.toml Cargo.lock ./
 RUN cargo build --release
 
 COPY src ./src
+RUN touch ./src/main.rs # fix build cache
 RUN cargo build --release
 
 ##############
